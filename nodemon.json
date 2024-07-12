@@ -1,0 +1,12 @@
+{
+  "watch": [
+    "src/**",
+    "config/**"
+  ],
+  "ignore": [
+    "dist/**/*"
+  ],
+  "delay": "1000",
+  "exec": "pnpm dev:single",
+  "ext": "ts yml json"
+}
