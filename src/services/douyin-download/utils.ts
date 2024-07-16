@@ -1,0 +1,1 @@
+export const DOUYIN_SHARE_REGEX = /https:\/\/v.douyin.com\/\S+\//g;

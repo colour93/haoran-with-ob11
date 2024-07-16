@@ -3,4 +3,5 @@ export interface IOneBotApiResponseBase {
   echo?: string;
   retcode: number;
   message: string;
+  status: string;
 }

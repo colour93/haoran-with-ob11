@@ -3,8 +3,8 @@
   "version": "1.0.0",
   "description": "",
   "scripts": {
-    "dev": "nodemon",
-    "dev:single": "ts-node src",
+    "dev": "cross-env RUNNING_MODE=DEBUG nodemon | pino-pretty",
+    "dev:single": "ts-node src | pino-pretty",
     "build": "tsc",
     "start": "node dist"
   },
@@ -12,18 +12,23 @@
   "author": "",
   "license": "ISC",
   "devDependencies": {
+    "@types/node": "^20.14.10",
     "@types/ws": "^8.5.10",
+    "cross-env": "^7.0.3",
     "eslint": "^9.6.0",
     "nodemon": "^3.1.4",
+    "pino": "^9.3.1",
+    "pino-pretty": "^11.2.1",
     "prettier": "^3.3.2",
     "ts-node": "^10.9.2",
     "typescript": "^5.5.3"
   },
   "dependencies": {
     "@types/events": "^3.0.3",
+    "axios": "^1.7.2",
     "events": "^3.3.0",
-    "fs": "0.0.1-security",
     "nanoid": "3",
+    "openai": "^4.52.7",
     "ws": "^8.18.0"
   }
 }
