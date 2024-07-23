@@ -31,10 +31,13 @@ const downloadVideo: (shareUrl: string) => Promise<string | null> = async (share
   });
 }
 
-export default async ({ rawMessage, msg, bot }: { rawMessage: IOneBotEventGroupMessage; msg: string; bot: OneBot }) => {
+const douyinDownload: (params: { rawMessage: IOneBotEventGroupMessage; msg: string; bot: OneBot }) => Promise<boolean> = ({ rawMessage, msg, bot }) => new Promise(async (resolve) => {
 
   const result = DOUYIN_SHARE_REGEX.exec(msg);
-  if (!result) return;
+  if (!result) {
+    resolve(false);
+    return;
+  };
 
   const shareUrl = result[0] as string;
 
@@ -83,9 +86,16 @@ export default async ({ rawMessage, msg, bot }: { rawMessage: IOneBotEventGroupM
 
   process.env.RUNNING_MODE === 'DEBUG' && logger.debug('[douyin-download] Resp: ', resp);
 
-  if (resp.status != 'ok') bot.api.sendGroupMsg({
-    group_id: rawMessage.group_id,
-    message: "解析失败了"
-  })
+  if (resp.status != 'ok') {
+    bot.api.sendGroupMsg({
+      group_id: rawMessage.group_id,
+      message: "解析失败了"
+    })
+    resolve(false);
+  } else {
+    resolve(true);
+  }
 
-}
+})
+
+export default douyinDownload;
