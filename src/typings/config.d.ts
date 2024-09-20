@@ -4,8 +4,11 @@ export interface Config {
   selfUin: number;
   onebot: IOneBotParameters;
   openai: {
-    baseURL: string;
-    apiKey: string;
-    model: string;
+    currentConfig: string,
+    configs: Record<string, {
+      baseURL: string;
+      apiKey: string;
+      model: string;
+    }>
   }
 }

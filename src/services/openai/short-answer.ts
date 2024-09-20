@@ -33,11 +33,16 @@ const shortAnswer: (params: { rawMessage: IOneBotEventGroupMessage; msg: string;
       model,
     });
 
-    chatCompletion.choices.length > 0 && chatCompletion.choices[0].message.content && bot.api.sendGroupMsg({
-      group_id: rawMessage.group_id,
-      message: chatCompletion.choices[0].message.content
-    })
-    resolve(true);
+    if (chatCompletion.choices.length > 0 && chatCompletion.choices[0].message.content) {
+      logger.info('[openai-short-answer] Token used: ' + chatCompletion.usage?.total_tokens);
+      bot.api.sendGroupMsg({
+        group_id: rawMessage.group_id,
+        message: chatCompletion.choices[0].message.content
+      })
+      resolve(true);
+    } else {
+      throw new Error;
+    }
   } catch (error) {
     bot.api.sendGroupMsg({
       group_id: rawMessage.group_id,
