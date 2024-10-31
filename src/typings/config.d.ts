@@ -10,5 +10,11 @@ export interface Config {
       apiKey: string;
       model: string;
     }>
+  },
+  notify?: {
+    groupId: number;
+    events: {
+      online: boolean;
+    }
   }
 }

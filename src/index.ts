@@ -19,6 +19,11 @@ import llmStatus from "./services/openai/status";
 
     logger.info("Connected!");
 
+    if (config.notify?.events.online) bot.api.sendGroupMsg({
+      group_id: config.notify.groupId,
+      message: "I'm online!"
+    })
+
     bot.event.on('group-message', async (rawMessage) => {
 
       const { message: messageChain } = rawMessage;
