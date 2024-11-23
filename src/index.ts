@@ -40,15 +40,15 @@ import llmStatus from "./services/openai/status";
         return;
       }
 
+      // 抖音解析
+      flag = await douyinDownload({
+        rawMessage,
+        msg,
+        bot
+      });
+      if (flag) return;
+      
       if (isAtBot) {
-        // 抖音解析
-        flag = await douyinDownload({
-          rawMessage,
-          msg,
-          bot
-        });
-        if (flag) return;
-
         // 语言模型状态
         flag = await llmStatus({
           rawMessage,
